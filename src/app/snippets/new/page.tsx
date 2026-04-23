@@ -1,27 +1,21 @@
-import { db } from "@/lib/db";
-import { redirect } from "next/navigation";
+"use client";
+
+import { useActionState, startTransition } from "react";
+import * as actions from "@/actions";
 
 export default function SnippetCreatePage() {
-  async function createSnippet(formData: FormData) {
-    "use server";
-
-    const title = formData.get("title") as string;
-    const code = formData.get("code") as string;
-
-    try {
-      const snippet = await db.query(
-        "INSERT INTO snippet (title, code) VALUES ($1, $2) RETURNING *",
-        [title, code],
-      );
-      console.log(snippet.rows[0]);
-    } catch (error: any) {
-      console.log(error.message);
-    }
-    redirect("/");
+  const [formState, action] = useActionState(actions.createSnippet, {
+    message: "",
+  });
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => {
+      action(formData);
+    });
   }
-
   return (
-    <form action={createSnippet}>
+    <form onSubmit={handleSubmit}>
       <h3 className="font-bold m-3">Create A Snippet</h3>
       <div className="flex flex-col gap-4">
         <div className="flex gap-4">
@@ -45,7 +39,11 @@ export default function SnippetCreatePage() {
             id="code"
           />
         </div>
-
+        {formState.message ? (
+          <div className="my-2 p-2 bg-red-200 border rounded border-red-400">
+            {formState.message}
+          </div>
+        ) : null}
         <button
           className=" rounded p-2 bg-blue-200 cursor-pointer"
           type="submit"
