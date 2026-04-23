@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
+import * as actions from "@/actions";
 
 interface SnippetShowPageProps {
   params: Promise<{
@@ -14,6 +16,8 @@ export default async function SnippetShowPage(props: SnippetShowPageProps) {
   });
   // ....
   const { id } = await props.params;
+  // Even in server component , to call an external server action file , must use .bind method
+  const deleteSnippetAction = actions.deleteSnippet.bind(null, parseInt(id));
   try {
     const result = await db.query("SELECT * FROM snippet WHERE id = $1", [
       parseInt(id),
@@ -28,8 +32,17 @@ export default async function SnippetShowPage(props: SnippetShowPageProps) {
         <div className="flex m-4 justify-between items-center">
           <h1 className="text-xl font-bold">{snippet.title}</h1>
           <div className="flex gap-4">
-            <button className="p-2 border rounded">Edit</button>
-            <button className="p-2 border rounded">Delete</button>
+            <Link
+              href={`/snippets/${snippet.id}/edit`}
+              className="p-2 border rounded"
+            >
+              Edit
+            </Link>
+            <form action={deleteSnippetAction}>
+              <button className="p-2 border rounded cursor-pointer">
+                Delete
+              </button>
+            </form>
           </div>
         </div>
         <pre className="p-3 border rounded bg-gray-200 border-gray-200">
