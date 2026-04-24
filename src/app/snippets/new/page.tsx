@@ -58,6 +58,14 @@ export default function SnippetCreatePage() {
           options={{ minimap: { enabled: false } }}
           onChange={handleEditorChange}
           value={code}
+          loading={
+            <div className="text-center">
+              <div className="relative inline-block w-20 h-20 mb-6">
+                <div className="absolute top-0 left-0 w-full h-full border-4 border-gray-300 rounded-full animate-pulse"></div>
+                <div className="absolute top-0 left-0 w-full h-full border-t-4 border-blue-500 rounded-full animate-spin [animation-delay:-0.3s]"></div>
+              </div>
+            </div>
+          }
         />
 
         {formState.message ? (

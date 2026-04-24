@@ -16,7 +16,8 @@ const ChevronIcon = ({
   color = "currentColor",
   initialDirection = "right",
 }: ChevronIconProps) => {
-  const [direction, setDirection] = useState(initialDirection);
+  const [direction, setDirection] =
+    useState<InitialDirection>(initialDirection);
 
   const toggleDirection = () => {
     setDirection((prevDirection) =>
