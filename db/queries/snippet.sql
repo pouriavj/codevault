@@ -1,5 +1,20 @@
-CREATE TABLE snippet (
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    code VARCHAR(500) 
+    name VARCHAR(100) NOT NULL,
+    password VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE folders (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    folder_id INTEGER REFERENCES folders(id) ON DELETE CASCADE
+);
+
+CREATE TABLE files (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    folder_id INTEGER REFERENCES folders(id) ON DELETE CASCADE,
+    content TEXT
 );

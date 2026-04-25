@@ -1,27 +1,51 @@
-@import "tailwindcss";
 body {
-  background-color: #e9edf2;
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
-.home {
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 32px;
-  box-shadow: 1px 2px 18px rgba(0, 0, 0, 0.116);
-  margin-top: 32px;
+.main-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #1E1E1E;
 }
-.divider {
-  height: 1px;
-  background: linear-gradient(to right, #cccccc86);
-  margin: 16px 0;
+
+
+
+.side-bar {
+  height: 100vh;
+  width: 24%;
+  background-color: #4e4d4c;
 }
-.new {
-  border-radius: 32px;
-  padding: 16px 24px;
-  background: linear-gradient(to right, #cccccc86, #dae7ee, #e9edf2);
-  font-weight: 500;
-  color: rgb(17, 51, 97);
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-right: 16px;
 }
-.new:hover {
-  background: linear-gradient(to right, #15b18242, #16aa7e38, #24bdd83b);
-  color: rgb(0, 0, 0);
+
+.logo {
+  display: flex;
+  gap: 26px;
+}
+
+.explorer {
+  margin-top: 54px;
+  margin-left: 16px;
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.folder-title {
+  display: flex;
+  gap: 8px;
+  align-content: center;
+  color: #e9edf2;
+  font-family: "Google Sans";
+  font-size: 16;
+  font-weight: 200;
+  cursor: pointer;
 }

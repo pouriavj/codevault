@@ -51,7 +51,7 @@ export default function SnippetCreatePage() {
           />
         </div> */}
         <Editor
-          height="40vh"
+          height="80vh"
           theme="vs-dark"
           language="javascript"
           defaultValue=""

@@ -1,36 +1,24 @@
 "use client";
-// Rotating chevron icon on click
-import { useState } from "react";
 
 interface ChevronIconProps {
   size?: number;
   color?: string;
-  initialDirection?: InitialDirection;
+  direction: string;
 }
-type InitialDirection = "right" | "bottom";
 
 const chevronPath = "M6 3L11 8L6 13";
 
 const ChevronIcon = ({
-  size = 16,
+  size = 18,
   color = "currentColor",
-  initialDirection = "right",
+  direction,
 }: ChevronIconProps) => {
-  const [direction, setDirection] =
-    useState<InitialDirection>(initialDirection);
-
-  const toggleDirection = () => {
-    setDirection((prevDirection) =>
-      prevDirection === "right" ? "bottom" : "right",
-    );
-  };
-
   // Determine the rotation angle based on the direction state
   // 0deg for 'right', 90deg for 'bottom'
   const rotationAngle = direction === "right" ? 0 : 90;
 
   return (
-    <div onClick={toggleDirection} style={{ cursor: "pointer" }}>
+    <div style={{ cursor: "pointer", display: "flex" }}>
       <svg
         width={size}
         height={size}
