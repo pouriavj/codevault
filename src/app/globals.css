@@ -6,7 +6,7 @@ body {
 .main-container {
   display: flex;
   flex-direction: row;
-  background-color: #1e1e1e;
+  
 }
 
 .side-bar {
@@ -30,11 +30,10 @@ body {
 
 .explorer {
   margin-top: 54px;
-  margin-left: 16px;
-  margin-right: 16px;
+
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
 }
 
 .folder-title {
@@ -46,6 +45,8 @@ body {
   font-size: 16;
   font-weight: 200;
   cursor: pointer;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .child-folders {
@@ -54,8 +55,10 @@ body {
 }
 
 .child-files {
-  margin-left: 32px;
-  margin-top: 18px;
+  margin-left: 54px;
+  margin-top: 9px;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
 .file-title {
@@ -66,4 +69,15 @@ body {
   font-family: "Google Sans";
   font-size: 16px;
   cursor: pointer;
+}
+
+.editor{
+  width: 100%;
+}
+
+.tool-bar{
+  display: flex;
+  height: 36px;
+  background-color: #191919;
+  color: #e9edf2;
 }

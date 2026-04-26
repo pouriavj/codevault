@@ -23,12 +23,18 @@ interface FolderGroupProps {
       content: string | null;
     }[];
   };
+  selectedFile: number;
+  setFile: (id: number) => void;
+  count?: number;
 }
 
 export default function FolderGroup({
   id,
   name,
   findChildren,
+  selectedFile,
+  setFile,
+  count = 1,
 }: FolderGroupProps) {
   const [direction, setDirection] = useState("right");
 
@@ -40,6 +46,7 @@ export default function FolderGroup({
 
   const renderChildren = (id: number) => {
     const { childFolders, childFiles } = findChildren(id);
+    count++;
     return (
       <div>
         {childFolders.map((folder) => {
@@ -49,14 +56,30 @@ export default function FolderGroup({
                 id={folder.id}
                 name={folder.name}
                 findChildren={findChildren}
+                selectedFile={selectedFile}
+                setFile={setFile}
+                count={count}
               />
             </div>
           );
         })}
         {childFiles.map((file) => {
           return (
-            <div className="child-files file-title" key={file.id}>
-              <FileIcon /> {file.name}
+            <div
+              style={{
+                backgroundColor: file.id === selectedFile ? "#605F5E" : "unset",
+
+                marginLeft: `${count * -16}px`,
+              }}
+              onClick={() => setFile(file.id)}
+              key={file.id}
+            >
+              <div
+                className={"child-files file-title"}
+                style={{ paddingLeft: `${count * 16}px` }}
+              >
+                <FileIcon /> {file.name}
+              </div>
             </div>
           );
         })}

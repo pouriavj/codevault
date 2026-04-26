@@ -1,4 +1,5 @@
 "use client";
+import useFileSelect from "@/hooks/useFileSelect";
 import FolderGroup from "./folder-group";
 import Logo from "./icons/logo";
 import SearchIcon from "./icons/search-icon";
@@ -21,6 +22,8 @@ interface SideBarProps {
 }
 
 export default function SideBar({ folders, files }: SideBarProps) {
+  const {selectedFile, setFile} = useFileSelect()
+
   const folderGroupChildren = (folderId: number | null) => {
     const childFolders = folders.filter((folder) => {
       return folder.folder_id === folderId;
@@ -39,6 +42,8 @@ export default function SideBar({ folders, files }: SideBarProps) {
           id={folder.id}
           name={folder.name}
           findChildren={folderGroupChildren}
+          selectedFile={selectedFile}
+          setFile={setFile}
         />
       );
     }
