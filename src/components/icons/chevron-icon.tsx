@@ -9,7 +9,7 @@ interface ChevronIconProps {
 const chevronPath = "M6 3L11 8L6 13";
 
 const ChevronIcon = ({
-  size = 18,
+  size = 20,
   color = "currentColor",
   direction,
 }: ChevronIconProps) => {
@@ -18,31 +18,29 @@ const ChevronIcon = ({
   const rotationAngle = direction === "right" ? 0 : 90;
 
   return (
-    <div style={{ cursor: "pointer", display: "flex" }}>
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 16 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{
-          color: color,
-          transitionProperty: "transform", // Transition the transform property
-          transitionDuration: "300ms", // Animation speed
-          transitionTimingFunction: "ease-in-out", // Smoothness
-          transform: `rotate(${rotationAngle}deg)`, // Apply the rotation dynamically
-          transformOrigin: "center", // Ensure rotation happens around the center
-        }}
-      >
-        <path
-          d={chevronPath}
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </div>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{
+        color: color,
+        transitionProperty: "transform", // Transition the transform property
+        transitionDuration: "300ms", // Animation speed
+        transitionTimingFunction: "ease-in-out", // Smoothness
+        transform: `rotate(${rotationAngle}deg)`, // Apply the rotation dynamically
+        transformOrigin: "center", // Ensure rotation happens around the center
+      }}
+    >
+      <path
+        d={chevronPath}
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 };
 

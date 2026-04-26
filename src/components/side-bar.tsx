@@ -1,3 +1,4 @@
+"use client";
 import FolderGroup from "./folder-group";
 import Logo from "./icons/logo";
 import SearchIcon from "./icons/search-icon";
@@ -20,9 +21,26 @@ interface SideBarProps {
 }
 
 export default function SideBar({ folders, files }: SideBarProps) {
+  const folderGroupChildren = (folderId: number | null) => {
+    const childFolders = folders.filter((folder) => {
+      return folder.folder_id === folderId;
+    });
+    const childFiles = files.filter((file) => {
+      return file.folder_id === folderId;
+    });
+    return { childFolders, childFiles };
+  };
+
   const renderFolders = folders.map((folder) => {
     if (folder.folder_id == null) {
-      return <FolderGroup key={folder.id} id={folder.id} name={folder.name} />;
+      return (
+        <FolderGroup
+          key={folder.id}
+          id={folder.id}
+          name={folder.name}
+          findChildren={folderGroupChildren}
+        />
+      );
     }
   });
 
