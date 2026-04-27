@@ -1,10 +1,30 @@
 import { useState } from "react";
+
 // custom hook to select files , its defined inside parent and passed to nested child FormGroups
+// this hook does both setting file and setting file array for editor toolbar
+// this hook should be called in parent (client-container), its purpuse it to make parent code more readable
+// also it makes use of 2 first required arguments in child components and 3rd one only in parent (more readable)
+
+// setFileArray should update with id directly not selected file that depends on previous state
+
 export default function useFileSelect() {
-  const [selectedFile, setSelectedFile] = useState(0);
-  function setFile(id: number) {
+  const [selectedFile, setSelectedFile] = useState<number>(0);
+  const [fileArray, setFileArray] = useState<{ id: number; name: string }[]>(
+    [],
+  );
+  const MAX_FILES = 10;
+  function setFile(id: number, name: string) {
     setSelectedFile(id);
+
+    // .some loops into onject and if codition matched it return true and stop , 
+    // .includes works for simple one values , .some for comples object values
+    const isDuplicate = fileArray.some((file) => file.id === id); 
+    if (!isDuplicate && fileArray.length < MAX_FILES ) {
+      setFileArray((prevValue) => {
+        return [...prevValue, { id, name }];
+      });
+    }
   }
 
-  return { selectedFile, setFile };
+  return { selectedFile, setFile, fileArray };
 }

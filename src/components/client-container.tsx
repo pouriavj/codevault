@@ -24,10 +24,13 @@ export default function ClientContainer({
   folders,
   files,
 }: CilentContainerProps) {
-  const { selectedFile, setFile } = useFileSelect();
+  const { selectedFile, setFile, fileArray } = useFileSelect();
   const selectedSnippet = files.find((file) => {
     return file.id === selectedFile;
   });
+ 
+  
+  
   return (
     <div className="main-container">
       <SideBar
@@ -38,10 +41,12 @@ export default function ClientContainer({
       />
       <MyEditor
         snippet={{
-          id: 1,
-          title: "sdsdsdsdsdsdsdsd",
+          id: selectedSnippet?.id,
+          name: selectedSnippet?.name,
           code: selectedSnippet?.content,
         }}
+        fileArray={fileArray}
+        setFile={setFile}
       />
     </div>
   );

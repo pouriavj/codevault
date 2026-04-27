@@ -20,7 +20,7 @@ interface SideBarProps {
     content: string | null;
   }[];
   selectedFile: number;
-  setFile: (id: number) => void;
+  setFile: (id: number, name: string) => void;
 }
 
 export default function SideBar({

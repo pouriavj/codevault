@@ -24,7 +24,7 @@ interface FolderGroupProps {
     }[];
   };
   selectedFile: number;
-  setFile: (id: number) => void;
+  setFile: (id: number, name: string) => void;
   count?: number;
 }
 
@@ -71,7 +71,7 @@ export default function FolderGroup({
 
                 marginLeft: `${count * -16}px`,
               }}
-              onClick={() => setFile(file.id)}
+              onClick={() => setFile(file.id, file.name)}
               key={file.id}
             >
               <div
