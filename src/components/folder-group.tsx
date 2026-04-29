@@ -29,7 +29,7 @@ interface FolderGroupProps {
   setFolder: (id: number) => void;
   selectedFolder: number;
 }
-
+// This is the nested folder group structure that returns itself inside it (tree structure)
 export default function FolderGroup({
   id,
   name,
@@ -58,20 +58,20 @@ export default function FolderGroup({
         {childFolders.map((folder) => {
           // this mock folder input only appears as child folder when adding new folder
           if (folder.user_id === -1) {
-                return (
-                  <div
-                    key={folder.id}
-                    className="folder-title"
-                    style={{ marginLeft: 30 , marginTop: 16 }}
-                    // Stop propagation so clicks inside this div don't trigger the global handler in ClientContainer
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <ClosedFolderIcon />
-                    <input type="text" autoFocus />
-                    <button>Save</button>
-                  </div>
-                );
-              }
+            return (
+              <div
+                key={folder.id}
+                className="folder-title"
+                style={{ marginLeft: 30, marginTop: 16 }}
+                // Stop propagation so clicks inside this div don't trigger the global handler in ClientContainer
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ClosedFolderIcon />
+                <input type="text" autoFocus />
+                <button>Save</button>
+              </div>
+            );
+          }
 
           return (
             <div className="child-folders" key={folder.id}>

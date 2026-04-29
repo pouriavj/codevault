@@ -3,7 +3,8 @@
 import useFileSelect from "@/hooks/useFileSelect";
 import MyEditor from "./my-editor";
 import SideBar from "./side-bar";
-import { useState } from "react";
+import { useActionState, useState } from "react";
+import * as actions from "@/actions";
 
 interface CilentContainerProps {
   folders: {
@@ -34,7 +35,16 @@ export default function ClientContainer({
     selectedFolder,
   } = useFileSelect();
   const [isAddingFolder, setIsAddingFolder] = useState(false); // Manage visibility of folder input
-  const [newFolderArray, setNewFolderArray] = useState(folders);
+  const [newFolderArray, setNewFolderArray] = useState(folders); // Makes new folder array to contains a mock child folder input for better Ui vs-code style
+
+  // useActionState initialize
+  const [formState, submitAction, isPending] = useActionState(
+    actions.createFolder,
+    { message: "" },
+  );
+
+
+
 
   const selectedSnippet = files.find((file) => {
     return file.id === selectedFile;
@@ -92,6 +102,10 @@ export default function ClientContainer({
         selectedFolder={selectedFolder}
         addFolderInput={addFolderInput}
         isAddingFolder={isAddingFolder}
+        submitAction={submitAction}
+        isPending={isPending}
+        formState={formState}
+        cancelFolderInput={cancelFolderInput}
       />
       <MyEditor
         snippet={{

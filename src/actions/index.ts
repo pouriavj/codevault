@@ -64,3 +64,45 @@ export async function createSnippet(
   // redirect throws an error so should always be at the end
   redirect("/");
 }
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+export async function createFolder(
+  prevState: { message: string }, 
+  formData: FormData,
+) {
+  try {
+    const name = formData.get("name") as string;
+    const folderId = formData.get("folder_id") as string; // Handle subfolders
+    const userId = formData.get("user_id") as string; // From hidden input
+
+    // Validation
+    if (typeof name !== "string" || name.length < 2) {
+      return { message: "Name must be longer than 2 characters." };
+    }
+
+    // Parse IDs (null if empty/undefined)
+    const parsedFolderId = folderId ? parseInt(folderId) : null;
+    const parsedUserId = userId ? parseInt(userId) : null;
+
+    // Insert query 
+    const newFolder = await db.query(
+      "INSERT INTO folders (name, folder_id, user_id) VALUES ($1, $2, $3) RETURNING *",
+      [name, parsedFolderId, parsedUserId],
+    );
+
+    console.log("Created folder:", newFolder.rows[0]);
+
+    revalidatePath("/"); // Revalidate after success
+
+    // return a state object for useActionState
+    return { message: "success" }; 
+
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Something went wrong...";
+    console.error("Create folder error:", message);
+    return { message };
+  }
+}
