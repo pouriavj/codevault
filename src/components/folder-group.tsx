@@ -5,6 +5,7 @@ import ClosedFolderIcon from "./icons/closed-folder-icon";
 import OpenFolderIcon from "./icons/open-folder-icon";
 import FileIcon from "./icons/file-icon";
 import NewFolderInput from "./new-folder-input";
+import type { ItemToAdd } from "./client-container";
 
 interface FolderGroupProps {
   id: number;
@@ -30,12 +31,12 @@ interface FolderGroupProps {
   setFolder: (id: number) => void;
   selectedFolder: number;
   submitAction: (formData: FormData) => void;
-  cancelFolderInput: () => void;
   isPending: boolean;
   formState: {
     message: string | null;
   };
   rootUserId: number | null;
+  cancelInput: (inputType: ItemToAdd) => void;
 }
 // This is the nested folder group structure that returns itself inside it (tree structure)
 export default function FolderGroup({
@@ -48,7 +49,7 @@ export default function FolderGroup({
   setFolder,
   selectedFolder,
   submitAction,
-  cancelFolderInput,
+  cancelInput,
   isPending,
   formState,
   rootUserId,
@@ -75,7 +76,7 @@ export default function FolderGroup({
               <NewFolderInput
                 key={-1}
                 submitAction={submitAction}
-                cancelFolderInput={cancelFolderInput}
+                cancelInput={cancelInput}
                 isPending={isPending}
                 formState={formState}
                 rootUserId={rootUserId}
@@ -96,7 +97,7 @@ export default function FolderGroup({
                 setFolder={setFolder}
                 selectedFolder={selectedFolder}
                 submitAction={submitAction}
-                cancelFolderInput={cancelFolderInput}
+                cancelInput={cancelInput}
                 isPending={isPending}
                 formState={formState}
                 rootUserId={rootUserId}

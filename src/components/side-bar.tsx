@@ -7,6 +7,7 @@ import Logo from "./icons/logo";
 import SearchIcon from "./icons/search-icon";
 import UserIcon from "./icons/user-icon";
 import NewFolderInput from "./new-folder-input";
+import type { ItemToAdd } from "./client-container";
 
 interface SideBarProps {
   folders: {
@@ -26,14 +27,14 @@ interface SideBarProps {
   setFile: (id: number, name: string) => void;
   setFolder: (id: number) => void;
   selectedFolder: number;
-  addFolderInput: () => void;
-  isAddingFolder: boolean; // To know if the input UI is visible
+  addMockInput: (inputType: ItemToAdd) => void;
+  isAddingItem: ItemToAdd; // To know if the input UI is visible
   submitAction: (formData: FormData) => void;
   isPending: boolean;
   formState: {
     message: string | null;
   };
-  cancelFolderInput: () => void;
+  cancelInput: (inputType: ItemToAdd) => void;
 }
 
 export default function SideBar({
@@ -43,13 +44,16 @@ export default function SideBar({
   setFile,
   setFolder,
   selectedFolder,
-  addFolderInput,
-  isAddingFolder,
+  addMockInput,
+  isAddingItem,
   submitAction,
   isPending,
   formState,
-  cancelFolderInput,
+  cancelInput,
 }: SideBarProps) {
+  const rootUserId =
+    folders.find((f) => f.folder_id === null && f.user_id !== -1)?.user_id ||
+    null;
   // Fetch folder group childern on nested child folder call
   const folderGroupChildren = (folderId: number | null) => {
     const childFolders = folders.filter((folder) => {
@@ -62,9 +66,6 @@ export default function SideBar({
   };
 
   const renderFolders = folders.map((folder) => {
-    const rootUserId =
-      folders.find((f) => f.folder_id === null && f.user_id !== -1)?.user_id ||
-      null;
     // Ui input for adding a folder , catching special folder with user_id = -1
     if (folder.user_id === -1 && folder.folder_id == null) {
       return (
@@ -72,7 +73,7 @@ export default function SideBar({
         <NewFolderInput
           key={-1}
           submitAction={submitAction}
-          cancelFolderInput={cancelFolderInput}
+          cancelInput={cancelInput}
           isPending={isPending}
           formState={formState}
           rootUserId={rootUserId}
@@ -92,7 +93,7 @@ export default function SideBar({
           setFolder={setFolder}
           selectedFolder={selectedFolder}
           submitAction={submitAction}
-          cancelFolderInput={cancelFolderInput}
+          cancelInput={cancelInput}
           isPending={isPending}
           formState={formState}
           rootUserId={rootUserId}
@@ -111,8 +112,20 @@ export default function SideBar({
     }
   };
 
-  const handleAddFolder = () => {
-    addFolderInput();
+  const handleAdd = (itemType: ItemToAdd): void => {
+    if (itemType === "folder") {
+      if (isAddingItem === "file") {
+        cancelInput("file");
+      } else {
+        addMockInput("folder");
+      }
+    } else if (itemType === "file") {
+      if (isAddingItem === "folder") {
+        cancelInput("folder");
+      } else {
+        addMockInput("file");
+      }
+    }
   };
 
   return (
@@ -125,11 +138,13 @@ export default function SideBar({
         <SearchIcon />
       </div>
       <div className="create-buttons">
-        <div className="button">
-          <AddFileIcon />
-        </div>
-        {!isAddingFolder && (
-          <div className="button" onClick={handleAddFolder}>
+        {isAddingItem === "none" && (
+          <div className="button" onClick={() => handleAdd("file")}>
+            <AddFileIcon />
+          </div>
+        )}
+        {isAddingItem === "none" && (
+          <div className="button" onClick={() => handleAdd("folder")}>
             <AddFolderIcon />
           </div>
         )}

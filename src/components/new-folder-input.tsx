@@ -1,10 +1,11 @@
 import { startTransition, useRef, useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import ClosedFolderIcon from "./icons/closed-folder-icon";
+import type { ItemToAdd } from "./client-container";
 
 interface NewFolderInputProps {
   submitAction: (formData: FormData) => void;
-  cancelFolderInput: () => void;
+  cancelInput: (inputType: ItemToAdd) => void;
   isPending: boolean;
   formState: {
     message: string | null;
@@ -20,7 +21,7 @@ type FormValues = {
 
 export default function NewFolderInput({
   submitAction,
-  cancelFolderInput,
+  cancelInput,
   isPending,
   formState,
   parentFolderId,
@@ -74,9 +75,22 @@ export default function NewFolderInput({
   };
 
   // Watch for submittion of the form to cancel the mock folder input
+
+  // useEffect was absolutely necessary here becuse , when save button is pressed it first validates input with RHF then calls server action
+  // server action is async function and provides a promise , but here inside a client component we cannot directly use async functions in the body , so
+  // the only state we know about server action is [formState, action, isPending], if we try to use formstate or isPending to cancel input when data reached server
+  // we have to put this checking inside the function that calls server action after it did , which means putting it inside handleFormSubmit, BUT the key point is that
+  // after user clicks save button we cannot await submitAction, and formState or isPending still not changed so the cancel function does not get called.
+  // and even if we put cancel function directly after submitAction , again it will be called in sync with action and it will call cancel function which is parent function
+  // and it will rerender this child component and resets form . so becuse the only connection to server is formState and it only changes after submittion , after submittion
+  // we can only use formState to change a local state and maybe render a message , we cannot call a function (cancel function) after formState changes becuse for that we need
+  // async call of a function inside the body of component which is forbidden in client component . so becuse we cant access server async response right after submittion to cancel mock input
+  // we need a local state isSubmitted to be called inside onSubmit function and a useEffect to call the cancel function when this state is set . this state only sets when save button is pressed
+  // and its sumittion function called successfuly , after that useEffect will cancel mock input and thus rerenders the component and data adds and Ui rerenders.
+
   useEffect(() => {
     if (isSubmitted) {
-      cancelFolderInput();
+      cancelInput("folder");
       reset();
       setIsSubmitted(false);
     }

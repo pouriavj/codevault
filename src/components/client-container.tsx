@@ -22,6 +22,8 @@ interface CilentContainerProps {
   }[];
 }
 
+export type ItemToAdd = "none" | "folder" | "file";
+
 export default function ClientContainer({
   folders,
   files,
@@ -34,8 +36,9 @@ export default function ClientContainer({
     setFolder,
     selectedFolder,
   } = useFileSelect();
-  const [isAddingFolder, setIsAddingFolder] = useState(false); // Manage visibility of folder input
+  const [isAddingItem, setIsAddingItem] = useState<ItemToAdd>("none"); // Manage visibility of folder/file input
   const [newFolderArray, setNewFolderArray] = useState(folders); // Makes new folder array to contains a mock child folder input for better Ui vs-code style
+  const [newFileArray, setNewFileArray] = useState(files); // Makes new file array to contains a mock child file input for better Ui vs-code style
 
   // useActionState initialize
   const [formState, submitAction, isPending] = useActionState(
@@ -57,34 +60,60 @@ export default function ClientContainer({
     }
   };
 
-  const addFolderInput = () => {
-    setNewFolderArray((prevValue) => {
-      const foldersWithoutInput = prevValue.filter((f) => f.user_id !== -1);
-      return [
-        ...foldersWithoutInput,
-        {
-          id: newFolderArray.length + 1,
-          name: "input",
-          user_id: -1,
-          folder_id: selectedFolder === 0 ? null : selectedFolder,
-        },
-      ];
-    });
-    setIsAddingFolder(true);
+  const addMockInput = (itemType: ItemToAdd): void => {
+    if (itemType === "folder") {
+      setNewFolderArray((prevValue) => {
+        const foldersWithoutInput = prevValue.filter((f) => f.user_id !== -1);
+        return [
+          ...foldersWithoutInput,
+          {
+            id: newFolderArray.length + 1,
+            name: "input",
+            user_id: -1,
+            folder_id: selectedFolder === 0 ? null : selectedFolder,
+          },
+        ];
+      });
+      setIsAddingItem("folder");
+    } else if (itemType === "file") {
+      setNewFileArray((prevValue) => {
+        const filesWithoutInput = prevValue.filter((f) => f.user_id !== -1);
+        return [
+          ...filesWithoutInput,
+          {
+            id: newFileArray.length + 1,
+            name: "input",
+            user_id: -1,
+            folder_id: selectedFolder === 0 ? null : selectedFolder,
+            content: "",
+          },
+        ];
+      });
+      setIsAddingItem("file");
+    }
   };
 
-  const cancelFolderInput = () => {
-    // Remove the temporary folder object from the state
-    setNewFolderArray(folders);
-    setIsAddingFolder(false); // Set state to false
+  const cancelInput = (inputType: ItemToAdd): void => {
+    if (inputType === "folder") {
+      // Remove the temporary folder object from the state
+      setNewFolderArray(folders);
+      setIsAddingItem("none"); // Set state to false
+    } else if (inputType === "file") {
+      // Remove the temporary folder object from the state
+      setNewFileArray(files);
+      setIsAddingItem("none"); // Set state to false
+    }
   };
 
-  const handleGlobalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleGlobalClick = () => {
     // If the folder input is active AND the click target is NOT inside the input row, cancel.
     // The SideBar's stopPropagation will prevent this if the click IS inside the input.
-    if (isAddingFolder) {
-      cancelFolderInput();
-      setIsAddingFolder(false);
+    if (isAddingItem === "folder") {
+      cancelInput("folder");
+      setIsAddingItem("none");
+    } else if (isAddingItem === "file") {
+      cancelInput("file");
+      setIsAddingItem("none");
     }
   };
 
@@ -92,17 +121,17 @@ export default function ClientContainer({
     <div className="main-container" onClick={handleGlobalClick}>
       <SideBar
         folders={newFolderArray || folders}
-        files={files}
+        files={newFileArray || files}
         selectedFile={selectedFile}
         setFile={setFile}
         setFolder={setFolder}
         selectedFolder={selectedFolder}
-        addFolderInput={addFolderInput}
-        isAddingFolder={isAddingFolder}
+        addMockInput={addMockInput}
+        isAddingItem={isAddingItem}
         submitAction={submitAction}
         isPending={isPending}
         formState={formState}
-        cancelFolderInput={cancelFolderInput}
+        cancelInput={cancelInput}
       />
       <MyEditor
         snippet={{

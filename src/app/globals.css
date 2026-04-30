@@ -29,8 +29,7 @@ body {
 }
 
 .explorer {
-  margin-top: 54px;
-
+  margin-top: 78px;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -191,7 +190,7 @@ input:focus {
 }
 
 .save-button:hover {
-  background-color: #0395a8; /* Slightly darker cyan on hover */
+  background-color: #0395a8; 
 }
 
 .save-button:active {
