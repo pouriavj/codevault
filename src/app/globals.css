@@ -72,7 +72,7 @@ body {
 }
 
 .folder-title:hover {
-  color:#cecece;
+  color: #cecece;
 }
 
 .editor {
@@ -129,4 +129,78 @@ body {
 
 .button {
   cursor: pointer;
+}
+
+.new-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4;
+}
+
+input {
+  border: 2px solid #04c2b2;
+  border-radius: 4;
+  background-color: #f1ede83f;
+  caret-color: #292929;
+  font-size: 14;
+  max-width: 132;
+  color: #e9edf2;
+  font-family: "Google Sans";
+  font-size: 16;
+  font-weight: 200;
+  caret-color: auto;
+}
+.error-input {
+  border: #fd5858 2px solid;
+  border-radius: 4;
+  background-color: #f1ede83f;
+  caret-color: #292929;
+  color: #e9edf2;
+  font-family: "Google Sans";
+  font-size: 16;
+  font-weight: 200;
+  max-width: 132;
+  caret-color: auto;
+}
+
+.error-message {
+  color: #fd5858;
+  font-family: "Google Sans";
+  font-size: 14;
+  
+}
+input:focus {
+  outline: none; /* Removes the default browser outline */
+}
+.save-button {
+  background-color: #04c2b2;
+  color: #181715; 
+  font-family: "Google Sans";
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.save-button:hover {
+  background-color: #0395a8; /* Slightly darker cyan on hover */
+}
+
+.save-button:active {
+  transform: scale(0.98); /* Slight press effect */
+  background-color: #027a8a;
+}
+
+.save-button:disabled {
+  background-color: #292929;
+  color: #666;
+  cursor: not-allowed;
 }

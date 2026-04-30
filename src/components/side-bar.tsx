@@ -75,6 +75,7 @@ export default function SideBar({
     defaultValues: {
       name: "",
     },
+    mode: "onChange",
   });
 
   // Ref for the form element
@@ -86,7 +87,7 @@ export default function SideBar({
   // so that when the local state isSubmitted changes , the component also rerenders
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // 5. Handle Submit Click
+  // Handle Submit Click
   const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     // Prevent default form submission
     e.preventDefault();
@@ -104,7 +105,7 @@ export default function SideBar({
     }
   };
 
-  // 2. Watch for submittion of the form to cancel the mock folder input
+  // Watch for submittion of the form to cancel the mock folder input
   useEffect(() => {
     if (isSubmitted) {
       cancelFolderInput();
@@ -131,34 +132,34 @@ export default function SideBar({
         folders.find((f) => f.folder_id === null && f.user_id !== -1)
           ?.user_id || null;
       return (
-        // Mock folder input 
+        // Mock folder input
         <div
           key={-1}
           className="folder-title"
-          style={{ marginLeft: 28 }}
+          style={{ marginLeft: 28 , alignItems: "flex-start"}}
           // Stop propagation so clicks inside this div don't trigger the global handler in ClientContainer
           onClick={(e) => e.stopPropagation()}
         >
           <ClosedFolderIcon />
+          <div>
           {/* React Hook Form with ref and manual trigger method, onSubmit method uses useActionState hook */}
-          <form ref={formRef} onSubmit={handleFormSubmit}>
+          <form ref={formRef} onSubmit={handleFormSubmit} className="new-form">
             <Controller
               name="name"
               control={control}
               rules={{
-                required: "نام پوشه اجباری است.",
-                minLength: {
-                  value: 2,
-                  message: "نام باید حداقل ۲ کاراکتر باشد.",
-                },
+                required: "Name is required",
               }}
               render={({ field }) => (
                 <input
                   {...field}
+                  onChange={(e) => {
+                    field.onChange(e); // For live error update
+                  }}
                   type="text"
                   autoFocus
-                  placeholder="نام پوشه"
-                  className="border p-1 rounded"
+                  autoComplete="off"
+                  className={rhfErrors.name ? "error-input" : "input"}
                 />
               )}
             />
@@ -167,27 +168,25 @@ export default function SideBar({
             <input type="hidden" name="folder_id" value="" />
             <input type="hidden" name="user_id" value={rootUserId || ""} />
 
-            <button
-              type="submit"
-              disabled={isPending}
-              className="ml-2 px-2 py-1 bg-blue-500 text-white rounded"
-            >
-              {isPending ? "در حال ذخیره..." : "ذخیره"}
+            <button type="submit" disabled={isPending} className="save-button">
+              Save
             </button>
 
-            {/* Display React Hook Form Errors (Client-side) */}
+            
+          </form>
+          {/* Display React Hook Form Errors (Client-side) */}
             {rhfErrors.name && (
-              <div className="text-red-500 text-sm mt-1">
+              <div className="error-message">
                 {rhfErrors.name.message}
               </div>
             )}
             {/* Display Server Errors (Backend) */}
-            {/* {formState.serverError && (
-              <div className="text-red-500 text-sm mt-1">
-                {formState.serverError}
+             {formState.message?.includes("error") && (
+              <div className="error-message">
+                {formState.message}
               </div>
-            )} */}
-          </form>
+            )} 
+            </div>
         </div>
       );
     }

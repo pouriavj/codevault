@@ -79,14 +79,14 @@ export async function createFolder(
     const userId = formData.get("user_id") as string; // From hidden input
 
     // Validation
-    if (typeof name !== "string" || name.length < 2) {
-      return { message: "Name must be longer than 2 characters." };
+    if (typeof name !== "string" || name.length < 1) {
+      return { message: "error: name is required" };
     }
 
     // Parse IDs (null if empty/undefined)
     const parsedFolderId = folderId ? parseInt(folderId) : null;
     const parsedUserId = userId ? parseInt(userId) : null;
-
+    
     // Insert query 
     const newFolder = await db.query(
       "INSERT INTO folders (name, folder_id, user_id) VALUES ($1, $2, $3) RETURNING *",
@@ -103,6 +103,6 @@ export async function createFolder(
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Something went wrong...";
     console.error("Create folder error:", message);
-    return { message };
+    return { message: `error: ${message}` };
   }
 }
