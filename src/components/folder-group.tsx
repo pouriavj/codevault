@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChevronIcon from "./icons/chevron-icon";
 import ClosedFolderIcon from "./icons/closed-folder-icon";
 import OpenFolderIcon from "./icons/open-folder-icon";
@@ -50,6 +50,7 @@ interface FolderGroupProps {
     popupType: ItemToAdd;
     itemId: number;
   };
+  isAddingItem: ItemToAdd; // To know if the input UI is visible
 }
 // This is the nested folder group structure that returns itself inside it (tree structure)
 export default function FolderGroup({
@@ -71,6 +72,7 @@ export default function FolderGroup({
   handleEdit,
   handleToggle,
   toggleState,
+  isAddingItem,
 }: FolderGroupProps) {
   const [direction, setDirection] = useState("right");
 
@@ -80,6 +82,17 @@ export default function FolderGroup({
     );
     setFolder(id);
   };
+
+  // This useEffect is just for force openning the folder if add file/folder button is clicked, and a folder is selected and not opened
+  useEffect(() => {
+    if (
+      isAddingItem !== "none" &&
+      id === selectedFolder &&
+      direction === "right"
+    ) {
+      setDirection("bottom");
+    }
+  }, [isAddingItem]);
 
   const renderChildren = (id: number) => {
     const { childFolders, childFiles } = findChildren(id);
@@ -139,6 +152,7 @@ export default function FolderGroup({
                 deleteFile={deleteFile}
                 handleToggle={handleToggle}
                 toggleState={toggleState}
+                isAddingItem={isAddingItem}
               />
             </div>
           );

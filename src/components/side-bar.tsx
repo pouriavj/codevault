@@ -214,6 +214,7 @@ export default function SideBar({
           renameFile={renameFile}
           handleToggle={handleToggle}
           toggleState={toggleState}
+          isAddingItem={isAddingItem}
         />
       );
     }
