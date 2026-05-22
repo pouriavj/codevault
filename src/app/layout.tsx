@@ -13,10 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">
-        <div className="container mx-auto px-12">{children}</div>
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }
