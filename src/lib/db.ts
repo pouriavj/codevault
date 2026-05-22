@@ -1,5 +1,5 @@
 // lib/db.ts
-import { Client } from 'pg';
+import { Client } from "pg";
 
 const connectionConfig = {
   user: process.env.PG_USER,
@@ -19,10 +19,9 @@ let db: Client;
 
 if (!global._pgClient) {
   db = new Client(connectionConfig);
-  db
-    .connect()
-    .then(() => console.log('DB connected'))
-    .catch((err) => console.error('DB connection error:', err));
+  db.connect()
+    .then(() => console.log("DB connected"))
+    .catch((err) => console.error("DB connection error:", err));
   global._pgClient = db;
 } else {
   db = global._pgClient;
