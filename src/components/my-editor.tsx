@@ -109,7 +109,7 @@ export default function MyEditor({
           style={{
             backgroundColor: file.id === snippet.id ? "#1e1e1e" : "unset",
             color: file.id === snippet.id ? "#e9edf2" : "#CECECE",
-            borderTopColor: file.id === snippet.id ? "#04c2b2" : "",
+            borderTopColor: file.id === snippet.id ? "#00bcd4" : "",
             borderBottomColor: file.id === snippet.id ? "#1e1e1e" : "",
           }}
         >

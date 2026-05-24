@@ -147,7 +147,7 @@ body {
 
 .tool-bar {
   display: flex;
-  max-height: 72px;
+  max-height: 48px;
   background-color: #161616;
   color: #e9edf2;
   box-sizing: border-box;
@@ -633,8 +633,7 @@ input:focus {
     right: 16px;
     top: auto;
   }
-  .tool-bar-item{
+  .tool-bar-item {
     border-width: 3px;
   }
-  
 }
