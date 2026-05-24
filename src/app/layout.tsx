@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-// Configure viewport settings, including themeColor
+// dark theme color
 export const viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" }, // White for light mode
-    { media: "(prefers-color-scheme: dark)", color: "#1e1e1e" }, // Dark grey for dark mode
-  ],
+  themeColor: "#1e1e1e",
 };
 
 export const metadata: Metadata = {
