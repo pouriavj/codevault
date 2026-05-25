@@ -18,7 +18,7 @@ This project is a replica of the Visual Studio Code editor, featuring a nested f
 - **Mock Input Handling:** Robust handling of user inputs using Server Actions and React Hook Form.
 - **Responsive Design:** Adapts to various screen sizes.
 
-## Live Demo
+## 🌐 Live Demo
 
 Experience the Snippet Editor App live! You can access the deployed application here:
 
