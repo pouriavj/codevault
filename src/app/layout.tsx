@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-// dark theme color
 export const viewport = {
   themeColor: "#1e1e1e",
 };
@@ -9,6 +8,21 @@ export const viewport = {
 export const metadata: Metadata = {
   title: "Snippet Editor",
   description: "Code Editor",
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: {
+      url: "/apple-touch-icon.png",
+      sizes: "180x180",
+      type: "image/png",
+    },
+  },
 };
 
 export default function RootLayout({
