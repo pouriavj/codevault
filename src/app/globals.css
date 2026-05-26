@@ -150,7 +150,9 @@ body {
   background-color: #1e1e1e;
   
 }
-
+.code-mirror{
+  max-height: 90vh;
+}
 .tool-bar {
   display: flex;
   max-height: 48px;
