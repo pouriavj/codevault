@@ -150,6 +150,7 @@ body {
   background-color: #1e1e1e;
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .tool-bar {
@@ -158,6 +159,7 @@ body {
   background-color: #161616;
   color: #e9edf2;
   box-sizing: border-box;
+  flex: content;
 }
 .tool-bar-item {
   display: flex;

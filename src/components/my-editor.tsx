@@ -127,7 +127,7 @@ export default function MyEditor({
             </div>
           ) : (
             <div
-              style={{ height: 8, width: 8 }}
+              style={{ height: 20, width: 20 }}
               className="closeHover"
               onClick={(e) => {
                 e.stopPropagation(); // ** Needed to prevent conflict from outer div onClick with inner div onClick ** //
