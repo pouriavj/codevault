@@ -158,7 +158,7 @@ export default function MyEditor({
       <div className="code-mirror">
       <CodeMirror
         value={code}
-        height="92vh"
+        height="90vh"
         extensions={[javascript({ jsx: true }), oneDark]}
         onChange={handleEditorChange}
         autoFocus
