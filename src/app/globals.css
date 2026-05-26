@@ -1,5 +1,5 @@
 html {
-  height: 100%;
+  height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -34,22 +34,22 @@ body {
   }
 }
 
-.sidebar::-webkit-scrollbar {
+.side-bar::-webkit-scrollbar {
   width: 10px;
 }
 
-.sidebar::-webkit-scrollbar-track {
+.side-bar::-webkit-scrollbar-track {
   background: #292929;
   border-radius: 999px;
 }
 
-.sidebar::-webkit-scrollbar-thumb {
+.side-bar::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #04c2b2, #0395a8);
   border-radius: 999px;
   border: 2px solid #292929;
 }
 
-.sidebar::-webkit-scrollbar-thumb:hover {
+.side-bar::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #0395a8, #027a8a);
 }
 
@@ -140,12 +140,10 @@ body {
 .editor {
   width: 100%;
   position: relative;
-  height: 100vh;
+  height: 100%;
   transition: width 0.3s ease-in-out;
   overflow: hidden;
   background-color: #1e1e1e;
-  display: flex;
-  flex-direction: column;
 }
 
 .tool-bar {
@@ -606,6 +604,7 @@ input:focus {
 @media (max-width: 768px) {
   .side-bar {
     width: 16%;
+    overflow-y: hidden;
   }
   .header-container {
     flex-direction: column;

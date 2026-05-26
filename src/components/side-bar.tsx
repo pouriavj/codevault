@@ -293,7 +293,7 @@ export default function SideBar({
   });
 
   return (
-    <div className="side-bar" style={{ width: mobileSidebar ? "72vh" : "" , overflowY: mobileSidebar ? "visible" : "hidden"}}>
+    <div className="side-bar" style={{ width: mobileSidebar ? "72vh" : "" , overflowY: mobileSidebar ? "auto" : undefined}}>
       <div
         className="header-container"
         style={{
