@@ -148,10 +148,13 @@ body {
   transition: width 0.3s ease-in-out;
   overflow: hidden;
   background-color: #1e1e1e;
+  display: flex;
+  flex-direction: column;
   
 }
 .code-mirror{
   max-height: 90vh;
+  flex: 1;
 }
 .tool-bar {
   display: flex;
@@ -159,6 +162,7 @@ body {
   background-color: #161616;
   color: #e9edf2;
   box-sizing: border-box;
+  flex: 1;
 }
 .tool-bar-item {
   display: flex;
