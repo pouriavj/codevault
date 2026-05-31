@@ -7,7 +7,7 @@ export const viewport = {
 
 export const metadata: Metadata = {
   title: "Snippet Editor",
-  description: "Code Editor",
+  description: "Online code snippet editor built with Next.js.",
   manifest: "/site.webmanifest",
   icons: {
     icon: [
