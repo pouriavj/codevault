@@ -5,6 +5,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: "https://snippet-editor-lake.vercel.app",
       lastModified: new Date(),
+      priority: 1,
+      changeFrequency: "weekly",
     },
   ];
 }
