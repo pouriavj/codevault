@@ -6,16 +6,16 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://snippet-editor-lake.vercel.app"),
-  title: "Snippet Editor",
+  metadataBase: new URL("https://www.codevault.ir"),
+  title: "CodeVault",
   description:
-    "Online code snippet editor built with Next.js. Create, organize, and manage code snippets in a VS Code inspired interface.",
+    "Online code editor and storage, built with Next.js. Create, organize, and manage code snippets in a VS Code inspired interface.",
   openGraph: {
-    title: "Snippet Editor",
+    title: "CodeVault",
     description:
-      "Online code snippet editor built with Next.js. Create, organize, and manage code snippets in a VS Code inspired interface.",
-    url: "https://snippet-editor-lake.vercel.app",
-    siteName: "Snippet Editor",
+      "Online code editor and storage, built with Next.js. Create, organize, and manage code snippets in a VS Code inspired interface.",
+    url: "https://www.codevault.ir",
+    siteName: "CodeVault",
     type: "website",
   },
   manifest: "/site.webmanifest",

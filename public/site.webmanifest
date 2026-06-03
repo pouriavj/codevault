@@ -1,7 +1,7 @@
 {
-  "name": "Snippet Editor",
-  "short_name": "Snippet Editor",
-  "description": "Code Editor",
+  "name": "CodeVault",
+  "short_name": "CodeVault",
+  "description": "CodeVault Code Editor",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

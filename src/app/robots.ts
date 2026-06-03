@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://snippet-editor-lake.vercel.app/sitemap.xml",
+    sitemap: "https://www.codevault.ir/sitemap.xml",
   };
 }
