@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   verification: {
     // For google search engine for SEO
-    google: "HREIZ3F7QKQ8eS5Kco0eJ772qHdySuFjC92s6ofiWUY",
+    google: "fPGvKcuKD3SgZj63Qkvy1NG3s3azSzf_TKP8G-_uCM0",
   },
   icons: {
     icon: [
