@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://www.codevault.ir",
+      url: "https://codevault.ir",
       lastModified: new Date(),
       priority: 1,
       changeFrequency: "weekly",

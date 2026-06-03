@@ -6,7 +6,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.codevault.ir"),
+  metadataBase: new URL("https://codevault.ir"),
   title: "CodeVault",
   description:
     "Online code editor and storage, built with Next.js. Create, organize, and manage code snippets in a VS Code inspired interface.",
@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     title: "CodeVault",
     description:
       "Online code editor and storage, built with Next.js. Create, organize, and manage code snippets in a VS Code inspired interface.",
-    url: "https://www.codevault.ir",
+    url: "https://codevault.ir",
     siteName: "CodeVault",
     type: "website",
   },
   alternates: {
-    canonical: "https://www.codevault.ir",
+    canonical: "https://codevault.ir",
   },
   manifest: "/site.webmanifest",
   verification: {
