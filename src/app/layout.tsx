@@ -24,7 +24,13 @@ export const metadata: Metadata = {
     google: "fPGvKcuKD3SgZj63Qkvy1NG3s3azSzf_TKP8G-_uCM0",
   },
   authors: [{ name: "CodeVault" }],
-  keywords: ["code editor", "snippet manager", "online IDE", "code vault"],
+  keywords: [
+    "code editor",
+    "snippet manager",
+    "online IDE",
+    "code vault",
+    "snippet editor",
+  ],
   icons: {
     icon: [
       { url: "/favicon.ico" },
