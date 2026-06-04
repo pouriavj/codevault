@@ -22,7 +22,7 @@ This application(PWA) is a replica of the Visual Studio Code editor, featuring a
 
 Experience the Snippet Editor App live! You can access the deployed application here:
 
-[Visit the Live Website](https://snippet-editor-lake.vercel.app)
+[Visit the Live Website](https://codevault.ir/)
 
 ## Tech Stack
 
