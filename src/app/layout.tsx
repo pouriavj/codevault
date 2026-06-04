@@ -18,9 +18,6 @@ export const metadata: Metadata = {
     siteName: "CodeVault",
     type: "website",
   },
-  alternates: {
-    canonical: "https://codevault.ir",
-  },
   manifest: "/site.webmanifest",
   verification: {
     // For google search engine for SEO
