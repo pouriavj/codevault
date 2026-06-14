@@ -495,7 +495,8 @@ input:focus {
 .save {
   position: absolute;
   right: 32px;
-  top: 16px;
+  top: auto;
+  bottom: 32px;
   z-index: 100;
   display: flex;
   justify-content: center;
@@ -513,6 +514,20 @@ input:focus {
   background-color: #8a949f44;
   box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.1);
   transform: translateY(1px);
+}
+.save-loading-spinner {
+  width: 26px;
+  height: 26px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: save-spin 0.7s linear infinite;
+}
+
+@keyframes save-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 .monaco-loading {
   width: 100%;

@@ -153,31 +153,35 @@ export default function MyEditor({
     <div className="editor" style={{ width: mobileSidebar ? "32%" : "" }}>
       <div className="tool-bar">{renderToolBar()}</div>
       <div className="save" onClick={handleSave}>
-        <SaveIcon />
+        {editFileAction.isPending ? (
+          <div className="save-loading-spinner" />
+        ) : (
+          <SaveIcon />
+        )}
       </div>
       <div className="code-mirror">
-      <CodeMirror
-        value={code}
-        height="90vh"
-        extensions={[javascript({ jsx: true }), oneDark]}
-        onChange={handleEditorChange}
-        autoFocus
-        basicSetup={{
-          lineNumbers: true,
-          foldGutter: false,
-          dropCursor: true,
-          allowMultipleSelections: false,
-          indentOnInput: true,
-        }}
-        theme="dark"
-        style={{
-          backgroundColor: "#1e1e1e",
-          color: "#d4d4d4",
-          fontSize: "14px",
-          paddingTop: "16px",
-          paddingBottom: "16px",
-        }}
-      />
+        <CodeMirror
+          value={code}
+          height="90vh"
+          extensions={[javascript({ jsx: true }), oneDark]}
+          onChange={handleEditorChange}
+          autoFocus
+          basicSetup={{
+            lineNumbers: true,
+            foldGutter: false,
+            dropCursor: true,
+            allowMultipleSelections: false,
+            indentOnInput: true,
+          }}
+          theme="dark"
+          style={{
+            backgroundColor: "#1e1e1e",
+            color: "#d4d4d4",
+            fontSize: "14px",
+            paddingTop: "16px",
+            paddingBottom: "16px",
+          }}
+        />
       </div>
     </div>
   );
