@@ -152,7 +152,10 @@ export default function MyEditor({
   return (
     <div className="editor" style={{ width: mobileSidebar ? "32%" : "" }}>
       <div className="tool-bar">{renderToolBar()}</div>
-      <div className="save" onClick={handleSave}>
+      <div
+        className="save"
+        onClick={editFileAction.isPending ? undefined : handleSave}
+      >
         {editFileAction.isPending ? (
           <div className="save-loading-spinner" />
         ) : (
